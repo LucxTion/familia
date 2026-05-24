@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Para los mejores Padres</title>
+    <style>
+        /* Fuentes elegantes desde Google Fonts */
+        @import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&family=Poppins:wght@300;400;600&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #ffffff;
+            overflow: hidden;
+            background: #020208;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Fondo Espacial con Estrellas */
+        .space-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, #1b1235 0%, #050510 100%);
+            z-index: -2;
+        }
+
+        .stars {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: transparent url('https://www.transparenttextures.com/patterns/stardust.png') repeat;
+            z-index: -1;
+            animation: starsTwinkle 4s ease-in-out infinite alternate;
+        }
+
+        @keyframes starsTwinkle {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; filter: drop-shadow(0 0 2px #fff); }
+        }
+
+        /* Contenedor de la presentación */
+        .presentation-container {
+            width: 90%;
+            max-width: 650px;
+            height: 450px;
+            position: relative;
+            background: rgba(255, 255, 255, 0.04);
+            border-radius: 24px;
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 217, 102, 0.25);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(255, 217, 102, 0.05);
+            padding: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        /* Estilos de las Pantallas (Slides) */
+        .slide {
+            position: absolute;
+            opacity: 0;
+            visibility: hidden;
+            transform: scale(0.95);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            width: 100%;
+            padding: 0 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .slide.active {
+            opacity: 1;
+            visibility: visible;
+            transform: scale(1);
+        }
+
+        /* Títulos y Textos */
+        h1 {
+            font-family: 'Caveat', cursive;
+            font-size: 3.5rem;
+            color: #ffd966;
+            margin-bottom: 15px;
+            text-shadow: 0 0 15px rgba(255, 217, 102, 0.5);
+            letter-spacing: 1px;
+        }
+
+        h2 {
+            font-size: 1.6rem;
+            font-weight: 400;
+            color: #e2e8f0;
+            margin-bottom: 25px;
+        }
+
+        .author-tag {
+            font-family: 'Caveat', cursive;
+            font-size: 2.2rem;
+            color: #ff94b8;
+            margin-bottom: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 2px 20px;
+            border-radius: 50px;
+            border: 1px solid rgba(255, 148, 184, 0.3);
+        }
+
+        /* Colores personalizados por hermano */
+        .madelin .author-tag { color: #ff94b8; border-color: rgba(255, 148, 184, 0.3); }
+        .jose-luis .author-tag { color: #64b5f6; border-color: rgba(100, 181, 246, 0.3); }
+        .dilan .author-tag { color: #81c784; border-color: rgba(129, 199, 132, 0.3); }
+
+        p.message {
+            font-size: 1.25rem;
+            line-height: 1.8;
+            color: #f1f5f9;
+            font-style: italic;
+            max-width: 500px;
+        }
+
+        /* Botones Mágicos */
+        .btn-magic {
+            background: linear-gradient(45deg, #ffd966, #ff94b8);
+            color: #050510;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 217, 102, 0.4);
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .btn-magic:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 30px rgba(255, 148, 184, 0.7);
+        }
+
+        .btn-next {
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffd966;
+            border: 1px solid rgba(255, 217, 102, 0.4);
+            padding: 10px 25px;
+            font-size: 0.95rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-next:hover {
+            background: #ffd966;
+            color: #050510;
+            box-shadow: 0 0 15px rgba(255, 217, 102, 0.3);
+        }
+
+        /* Animación del Corazón Latiendo */
+        .heart-container {
+            margin-bottom: 20px;
+        }
+
+        .heart {
+            font-size: 5rem;
+            color: #ff4b72;
+            display: inline-block;
+            animation: pulse 1.2s infinite;
+            filter: drop-shadow(0 0 15px rgba(255, 75, 114, 0.6));
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            30% { transform: scale(1.2); }
+            60% { transform: scale(1); }
+            80% { transform: scale(1.15); }
+            100% { transform: scale(1); }
+        }
+
+        .final-text {
+            font-family: 'Caveat', cursive;
+            font-size: 2.8rem;
+            color: #ffd966;
+            text-shadow: 0 0 10px rgba(255, 217, 102, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="space-bg"></div>
+    <div class="stars"></div>
+
+    <div class="presentation-container">
+
+        <!-- PANTALLA 1: BIENVENIDA -->
+        <div class="slide active" id="slide-1">
+            <h1>¡Hola Yanina y Hola José!</h1>
+            <h2>¡Empecemos!</h2>
+            <button class="btn-magic" onclick="nextSlide()">Empezar la magia ✨</button>
+        </div>
+
+        <!-- PANTALLA 2: INTRODUCCIÓN HIJOS -->
+        <div class="slide" id="slide-2">
+            <h1>Esto es de parte de sus 3 hijos...</h1>
+            <p class="message" style="font-style: normal;">Hemos preparado algo muy especial para recordarles cuánto los amamos. Den clic abajo para continuar.</p>
+            <button class="btn-next" onclick="nextSlide()">Ver sorpresas ❤️</button>
+        </div>
+
+        <!-- PANTALLA 3: MADELIN -->
+        <div class="slide madelin" id="slide-3">
+            <div class="author-tag">Madelin (La mayor)</div>
+            <p class="message">"Gracias por ser mi guía incondicional, por enseñarme a ser fuerte y por construir este hermoso camino para nosotros. Sus sacrificios son mi mayor motivación. ¡Los amo con todo mi corazón!"</p>
+            <button class="btn-next" onclick="nextSlide()">Siguiente hermano ✨</button>
+        </div>
+
+        <!-- PANTALLA 4: JOSÉ LUIS -->
+        <div class="slide jose-luis" id="slide-4">
+            <div class="author-tag">José Luis (El del medio)</div>
+            <p class="message">"Mamá, papá, gracias por estar siempre en cada paso, por su paciencia infinita y por ser el mejor ejemplo de unión familiar. Su felicidad siempre será la mía. Son los mejores."</p>
+            <button class="btn-next" onclick="nextSlide()">Siguiente hermano ✨</button>
+        </div>
+
+        <!-- PANTALLA 5: DILAN -->
+        <div class="slide dilan" id="slide-5">
+            <div class="author-tag">Dilan</div>
+            <p class="message">"Gracias por cada risa, por su apoyo absoluto en mis metas y por enseñarme el verdadero valor de la disciplina y el amor. No podría estar más orgulloso de los padres que me tocaron."</p>
+            <button class="btn-next" onclick="nextSlide()">Ver mensaje final 💝</button>
+        </div>
+
+        <!-- PANTALLA 6: CORAZÓN FINAL -->
+        <div class="slide" id="slide-6">
+            <div class="heart-container">
+                <span class="heart">❤️</span>
+            </div>
+            <h1 class="final-text">¡Los amamos!</h1>
+            <h2>Son los padres geniales</h2>
+            <button class="btn-next" onclick="restartPresentation()">Volver al inicio 🔄</button>
+        </div>
+
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 6;
+
+        function nextSlide() {
+            // Quitamos la clase activa a la diapositiva actual
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            
+            // Avanzamos a la siguiente
+            currentSlide++;
+            
+            // Añadimos la clase activa a la nueva diapositiva
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+        }
+
+        function restartPresentation() {
+            // Ocultamos la última diapositiva
+            document.getElementById(`slide-${currentSlide}`).classList.remove('active');
+            
+            // Reiniciamos el contador a 1
+            currentSlide = 1;
+            
+            // Mostramos la primera de nuevo
+            document.getElementById(`slide-${currentSlide}`).classList.add('active');
+        }
+    </script>
+
+</body>
+</html>
